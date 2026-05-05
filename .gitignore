@@ -1,0 +1,6 @@
+# Build artifacts
+build/
+
+# VSCode local settings
+.vscode/c_cpp_properties.json
+.vscode/launch.json

@@ -20,6 +20,13 @@ const char *fragmentShaderSource = "#version 330 core\n"
     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
     "}\n\0";
 
+const char *fragmentShaderSource2 = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
+    "}\n\0";
+
 int main() {
     // GLFW 초기화
     if (!glfwInit()) {
@@ -46,14 +53,14 @@ int main() {
         return -1;
     }
 
+    int  success;
+    char infoLog[512];
+
     // 버텍스 셰이더 컴파일
     unsigned int vertexShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
-
-    int  success;
-    char infoLog[512];
 
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if(!success)
@@ -63,10 +70,13 @@ int main() {
     }
 
     // 프래그먼트 셰이더 컴파일
-    unsigned int fragmentShader;
+    unsigned int fragmentShader, fragmentShader2;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    fragmentShader2 = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glShaderSource(fragmentShader2, 1, &fragmentShaderSource2, NULL);
     glCompileShader(fragmentShader);
+    glCompileShader(fragmentShader2);
 
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if(!success)
@@ -76,12 +86,17 @@ int main() {
     }
 
     // 셰이더 프로그램 링크
-    unsigned int shaderProgram;
+    unsigned int shaderProgram, shaderProgram2;
     shaderProgram = glCreateProgram();
+    shaderProgram2 = glCreateProgram();
 
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
+
+    glAttachShader(shaderProgram2, vertexShader);
+    glAttachShader(shaderProgram2, fragmentShader2);
+    glLinkProgram(shaderProgram2);
 
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if(!success) {
@@ -91,6 +106,7 @@ int main() {
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    glDeleteShader(fragmentShader2);
 
     // vertice shader 소스 코드
     // float vertices[] = {
@@ -170,8 +186,10 @@ int main() {
         // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
+        glUseProgram(shaderProgram2);
         glBindVertexArray(VAO2);
         glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -182,6 +200,7 @@ int main() {
     glDeleteBuffers(1, &VBO1);
     glDeleteBuffers(1, &VBO2);
     glDeleteProgram(shaderProgram);
+    glDeleteProgram(shaderProgram2);
 
     glfwTerminate();
     return 0;

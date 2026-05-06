@@ -1,31 +1,24 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
-
-const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\n\0";
-
-const char *fragmentShaderSource2 = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
-    "}\n\0";
+std::string loadShaderSource(const char* path) {
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open shader file: " << path << "\n";
+        return "";
+    }
+    std::stringstream ss;
+    ss << file.rdbuf();
+    return ss.str();
+}
 
 int main() {
     // GLFW 초기화
@@ -57,6 +50,9 @@ int main() {
     char infoLog[512];
 
     // 버텍스 셰이더 컴파일
+    std::string vertexSrc = loadShaderSource("src/shaders/vertex.glsl");
+    const char* vertexShaderSource = vertexSrc.c_str();
+
     unsigned int vertexShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -70,13 +66,13 @@ int main() {
     }
 
     // 프래그먼트 셰이더 컴파일
-    unsigned int fragmentShader, fragmentShader2;
+    std::string fragmentSrc = loadShaderSource("src/shaders/fragment.glsl");
+    const char* fragmentShaderSource = fragmentSrc.c_str();
+
+    unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    fragmentShader2 = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glShaderSource(fragmentShader2, 1, &fragmentShaderSource2, NULL);
     glCompileShader(fragmentShader);
-    glCompileShader(fragmentShader2);
 
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if(!success)
@@ -86,17 +82,17 @@ int main() {
     }
 
     // 셰이더 프로그램 링크
-    unsigned int shaderProgram, shaderProgram2;
+    unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
-    shaderProgram2 = glCreateProgram();
+    // shaderProgram2 = glCreateProgram();
 
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
 
-    glAttachShader(shaderProgram2, vertexShader);
-    glAttachShader(shaderProgram2, fragmentShader2);
-    glLinkProgram(shaderProgram2);
+    // glAttachShader(shaderProgram2, vertexShader);
+    // glAttachShader(shaderProgram2, fragmentShader2);
+    // glLinkProgram(shaderProgram2);
 
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if(!success) {
@@ -106,7 +102,7 @@ int main() {
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-    glDeleteShader(fragmentShader2);
+    // glDeleteShader(fragmentShader2);
 
     // vertice shader 소스 코드
     // float vertices[] = {
@@ -121,16 +117,16 @@ int main() {
     // };  
 
     float vertices1[] = {
-        -0.5f,  0.5f, 0.0f, 
-        -0.9f, -0.5f, 0.0f, 
-        -0.1f, -0.5f, 0.0f,  
+         0.0f,  0.5f, 0.0f, 
+         0.5f, -0.5f, 0.0f, 
+        -0.5f, -0.5f, 0.0f,  
     };
 
-    float vertices2[] = {
-         0.5f,  0.5f, 0.0f,  
-         0.1f, -0.5f, 0.0f, 
-         0.9f, -0.5f, 0.0f, 
-    };
+    // float vertices2[] = {
+    //      0.5f,  0.5f, 0.0f,  
+    //      0.1f, -0.5f, 0.0f, 
+    //      0.9f, -0.5f, 0.0f, 
+    // };
 
     unsigned int VAO1, VAO2;
     // unsigned int EBO;
@@ -155,19 +151,19 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    glBindVertexArray(VAO2);
+    // glBindVertexArray(VAO2);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
+    // glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
 
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    // // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    // // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0); 
+    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // glEnableVertexAttribArray(0); 
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    // glBindBuffer(GL_ARRAY_BUFFER, 0);
+    // glBindVertexArray(0);
 
     // uncomment this call to draw in wireframe polygons.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -186,10 +182,10 @@ int main() {
         // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
-        glUseProgram(shaderProgram2);
-        glBindVertexArray(VAO2);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glBindVertexArray(0);
+        // glUseProgram(shaderProgram2);
+        // glBindVertexArray(VAO2);
+        // glDrawArrays(GL_TRIANGLES, 0, 3);
+        // glBindVertexArray(0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -200,7 +196,7 @@ int main() {
     glDeleteBuffers(1, &VBO1);
     glDeleteBuffers(1, &VBO2);
     glDeleteProgram(shaderProgram);
-    glDeleteProgram(shaderProgram2);
+    // glDeleteProgram(shaderProgram2);
 
     glfwTerminate();
     return 0;

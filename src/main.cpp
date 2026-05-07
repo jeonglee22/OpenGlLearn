@@ -149,6 +149,9 @@ int main() {
     // or set it via the texture class
     ourShader.setInt("texture2", 1);
 
+    float textureRatio = 0.5f;
+    float currentTime = 0.f;
+
     // 렌더 루프
     while (!glfwWindowShouldClose(window)) {
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -161,6 +164,21 @@ int main() {
         // float greenValue = sin(timeValue) / 2.0f + 0.5f;
         // int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
         // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+        float timeValue = glfwGetTime();
+        float deltaTime = timeValue - currentTime;
+        currentTime = timeValue;
+
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+            textureRatio += deltaTime;
+        else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+            textureRatio -= deltaTime;
+
+        if (textureRatio >= 1.0f) textureRatio = 1.0f;
+        if (textureRatio <= 0.f)  textureRatio = 0.f;
+
+        int ratioLocation = glGetUniformLocation(ourShader.ID, "ratio");
+        glUniform1f(ratioLocation, textureRatio);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);

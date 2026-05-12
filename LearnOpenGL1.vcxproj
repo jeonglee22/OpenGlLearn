@@ -291,6 +291,8 @@
     <ClInclude Include="Scripts\stb_image.h" />
     <ClInclude Include="Scripts\Texture.h" />
     <ClInclude Include="Scripts\WindowManager.h" />
+    <ClInclude Include="Scripts\VAO.h" />
+    <ClInclude Include="Scripts\VBO.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scripts\Game.cpp" />
@@ -301,8 +303,11 @@
     <ClCompile Include="Scripts\Shader.cpp" />
     <ClCompile Include="Scripts\Texture.cpp" />
     <ClCompile Include="Scripts\WindowManager.cpp" />
+    <ClCompile Include="Scripts\VAO.cpp" />
+    <ClCompile Include="Scripts\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="includes\glm\detail\func_common.inl" />
     <None Include="includes\glm\detail\func_common_simd.inl" />
     <None Include="includes\glm\detail\func_exponential.inl" />

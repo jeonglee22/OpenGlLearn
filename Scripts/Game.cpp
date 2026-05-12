@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "VAO.h"
 
 void Game::ProcessInput()
 {
@@ -105,64 +106,25 @@ void Game::Do()
     //         glm::vec3(0.0f, 0.0f, 0.0f), 
     //         glm::vec3(0.0f, 1.0f, 0.0f));
     
-    // float vertices2[] = {
-    //      0.5f,  0.5f, 0.0f,  
-    //      0.1f, -0.5f, 0.0f, 
-    //      0.9f, -0.5f, 0.0f, 
-    // };
     Texture texture1("assets/images/container.jpg", TextureDataType::INT);
     Texture texture2("assets/images/awesomeface.png", TextureDataType::INT);
 
-    unsigned int VAO1;
-    unsigned int EBO;
-    glGenVertexArrays(1, &VAO1);
-    // glGenVertexArrays(1, &VAO2);
-    unsigned int VBO1;
-    glGenBuffers(1, &VBO1);
-    // glGenBuffers(1, &VBO2);
-    glGenBuffers(1, &EBO);
+    VAO vao;
+    VBO ebo(GL_ELEMENT_ARRAY_BUFFER, indices, sizeof(indices));
+    VBO vbo(GL_ARRAY_BUFFER, vertices, sizeof(vertices));
 
-    glBindVertexArray(VAO1);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO1);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // color attribute
-    // glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3* sizeof(float)));
-    // glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);  
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    // glBindVertexArray(VAO2);
-
-    // glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
-
-    // // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    // glEnableVertexAttribArray(0); 
-
-    // glBindBuffer(GL_ARRAY_BUFFER, 0);
-    // glBindVertexArray(0);
+    vao.Bind();
+    vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), (void*)0);
+    vao.LinkAttrib(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    ebo.Bind();
+    vao.UnBind();
 
     // uncomment this call to draw in wireframe polygons.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     ourShader.use(); // don't forget to activate/use the shader before setting uniforms!
     // either set it manually like so:
-    glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+    ourShader.setInt("texture1", 0);
     // or set it via the texture class
     ourShader.setInt("texture2", 1);
 
@@ -224,7 +186,7 @@ void Game::Do()
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("view", view);
 
-        glBindVertexArray(VAO1);
+        vao.Bind();
         for(unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
@@ -241,7 +203,7 @@ void Game::Do()
         // glBindVertexArray(VAO1);
         // glDrawArrays(GL_TRIANGLES, 0, 36);
         // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
+        vao.UnBind();
 
         // trans = mat4(1.0f);
         // // trans = rotate(trans, (float)glfwGetTime(), vec3(0.0, 0.0, 1.0));
@@ -264,13 +226,6 @@ void Game::Do()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
-    glDeleteVertexArrays(1, &VAO1);
-    // glDeleteVertexArrays(1, &VBO2);
-    glDeleteBuffers(1, &VBO1);
-    // glDeleteBuffers(1, &VBO2);
-    // glDeleteProgram(shaderProgram);
-    // glDeleteProgram(shaderProgram2);
 }
 
 void Game::Release()

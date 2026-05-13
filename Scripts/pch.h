@@ -13,6 +13,8 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <unordered_map>
+#include <map>
 
 #include "Singleton.h"
 #include "Game.h"

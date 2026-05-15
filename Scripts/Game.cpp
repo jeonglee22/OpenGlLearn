@@ -187,6 +187,7 @@ void Game::Do()
     glm::vec3 lightPos(1.2f, 1.f, 2.f);
     glm::mat4 lightModel = glm::mat4(1.f);
     lightModel = glm::translate(lightModel, lightPos);
+    float currentAngle = glm::atan(1.f / 1.2f);
     lightModel = glm::scale(lightModel, glm::vec3(0.2f));
 
     auto window = WindowManager::GetInstance().GetWindow();
@@ -246,6 +247,11 @@ void Game::Do()
         // glActiveTexture(GL_TEXTURE1);
         // texture2.Bind();
 
+        float magnitude = glm::vec2(lightPos.x, lightPos.y).length();
+        float xPos = magnitude * cos(currentAngle + currentFrame);
+        float yPos = magnitude * sin(currentAngle + currentFrame);
+        lightPos = glm::vec3(xPos, yPos, lightPos.z);
+
         glm::mat4 view = camera.GetViewMatrix();
         // ourShader->setMat4("view", view);
 
@@ -285,6 +291,10 @@ void Game::Do()
         
 
         lightShader->use();
+        glm::mat4 lightModel = glm::mat4(1.f);
+        lightModel = glm::translate(lightModel, lightPos);
+        lightModel = glm::scale(lightModel, glm::vec3(0.2f));
+        
         lightShader->setMat4("model", lightModel);
         lightShader->setMat4("projection", projection);
         lightShader->setMat4("view", view);

@@ -257,8 +257,12 @@ void Game::Do()
 
         glm::mat4 model = glm::mat4(1.0f);
         cubeShader->use();
-        cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        // cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         cubeShader->setVec3("lightColor", 1.f, 1.f, 1.f);
+        cubeShader->setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        cubeShader->setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        cubeShader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        cubeShader->setFloat("material.shininess", 32.0f);
         cubeShader->setVec3("lightPos", lightPos);
         // cubeShader->setVec3("viewPos", camera.Position);
 

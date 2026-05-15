@@ -247,10 +247,10 @@ void Game::Do()
         // glActiveTexture(GL_TEXTURE1);
         // texture2.Bind();
 
-        float magnitude = glm::vec2(lightPos.x, lightPos.y).length();
-        float xPos = magnitude * cos(currentAngle + currentFrame);
-        float yPos = magnitude * sin(currentAngle + currentFrame);
-        lightPos = glm::vec3(xPos, yPos, lightPos.z);
+        // float magnitude = glm::vec2(lightPos.x, lightPos.y).length();
+        // float xPos = magnitude * cos(currentAngle + currentFrame);
+        // float yPos = magnitude * sin(currentAngle + currentFrame);
+        // lightPos = glm::vec3(xPos, yPos, lightPos.z);
 
         glm::mat4 view = camera.GetViewMatrix();
         // ourShader->setMat4("view", view);
@@ -260,7 +260,7 @@ void Game::Do()
         cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         cubeShader->setVec3("lightColor", 1.f, 1.f, 1.f);
         cubeShader->setVec3("lightPos", lightPos);
-        cubeShader->setVec3("viewPos", camera.Position);
+        // cubeShader->setVec3("viewPos", camera.Position);
 
         cubeShader->setMat4("projection", projection);
         cubeShader->setMat4("view", view);

@@ -1,5 +1,7 @@
 #pragma once
 #include "pch.h"
+#include "Singleton.h"
+#include "Game.h"
 
 class WindowManager : public Singleton<WindowManager>
 {

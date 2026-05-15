@@ -1,6 +1,10 @@
 #pragma once
 #include "pch.h"
 #include "Camera.h"
+#include "Singleton.h"
+#include "SceneManager.h"
+#include "WindowManager.h"
+#include "ShaderManager.h"
 
 class Game : public Singleton<Game>
 {

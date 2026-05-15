@@ -1,5 +1,7 @@
 #pragma once
 #include "pch.h"
+#include "GameObject.h"
+#include "Globals.h"
 
 class Scene
 {
@@ -14,11 +16,12 @@ public:
 	virtual void Render(GLFWwindow* window);
 	virtual void Release();
 
-	void AddGameObject();
-	void RemoveGameObject();
+	void AddGameObject(GameObject* go);
+	void RemoveGameObject(GameObject* go = NULL);
 
 private:
 	SceneId sceneId;
+	std::list<GameObject*> gameObjects;
 
 };
 

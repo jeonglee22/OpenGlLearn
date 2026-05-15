@@ -15,8 +15,4 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
-
-#include "Singleton.h"
-#include "Game.h"
-#include "WindowManager.h"
-#include "Globals.h"
+#include <list>

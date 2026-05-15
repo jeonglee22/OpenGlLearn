@@ -41,7 +41,7 @@
     <ClInclude Include="Scripts\Shader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Singleton.h">
+    <ClInclude Include="Scripts\Managers\Singleton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\stb_image.h">
@@ -50,7 +50,7 @@
     <ClInclude Include="Scripts\Texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\WindowManager.h">
+    <ClInclude Include="Scripts\Managers\WindowManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="includes\glm\detail\_features.hpp">
@@ -503,6 +503,18 @@
     <ClInclude Include="Scripts\VBO.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\Managers\GameObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Managers\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Managers\ShaderManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scripts\Game.cpp">
@@ -517,7 +529,7 @@
     <ClCompile Include="Scripts\Texture.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\WindowManager.cpp">
+    <ClCompile Include="Scripts\Managers\WindowManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="includes\glad.c">
@@ -533,6 +545,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\VBO.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Managers\GameObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Scene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Managers\SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Managers\ShaderManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

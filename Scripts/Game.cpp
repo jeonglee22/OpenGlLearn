@@ -22,15 +22,12 @@ void Game::ProcessInput()
 void Game::Init()
 {
     WindowManager::GetInstance().Init();
+    ShaderManager::GetInstance().Init();
+    SceneManager::GetInstance().Init();
 }
 
 void Game::Do()
 {
-    int  success;
-    char infoLog[512];
-
-    Shader ourShader("Scripts/Shaders/ex1.vs", "Scripts/Shaders/ex1.fs");
-
     // float vertices[] = {
     // // positions          // colors           // texture coords
     //  0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
@@ -121,12 +118,12 @@ void Game::Do()
 
     // uncomment this call to draw in wireframe polygons.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-    ourShader.use(); // don't forget to activate/use the shader before setting uniforms!
+    Shader* ourShader = ShaderManager::GetInstance().Get("Base");
+    ourShader->use(); // don't forget to activate/use the shader before setting uniforms!
     // either set it manually like so:
-    ourShader.setInt("texture1", 0);
+    ourShader->setInt("texture1", 0);
     // or set it via the texture class
-    ourShader.setInt("texture2", 1);
+    ourShader->setInt("texture2", 1);
 
     auto window = WindowManager::GetInstance().GetWindow();
 
@@ -144,8 +141,10 @@ void Game::Do()
 
         ProcessInput();
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        SceneManager::GetInstance().Update(deltaTime);
+
+
+        SceneManager::GetInstance().Render(window);
 
         // mat4 trans = mat4(1.0f);
         // // trans = rotate(trans, (float)glfwGetTime(), vec3(0.0, 0.0, 1.0));
@@ -171,7 +170,7 @@ void Game::Do()
         // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         // int viewLoc = glGetUniformLocation(ourShader.ID, "view");
         // glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        ourShader.setMat4("projection", projection);
+        ourShader->setMat4("projection", projection);
 
         // float timeValue = glfwGetTime();
         // float greenValue = sin(timeValue) / 2.0f + 0.5f;
@@ -184,7 +183,7 @@ void Game::Do()
         texture2.Bind();
 
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("view", view);
+        ourShader->setMat4("view", view);
 
         vao.Bind();
         for(unsigned int i = 0; i < 10; i++)
@@ -195,7 +194,7 @@ void Game::Do()
             // if (i % 3 == 0)
             //     angle = glfwGetTime() * 30.f;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            ourShader.setMat4("model", model);
+            ourShader->setMat4("model", model);
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
@@ -230,6 +229,9 @@ void Game::Do()
 
 void Game::Release()
 {
+    ShaderManager::GetInstance().Release();
+    SceneManager::GetInstance().Release();
+
     glfwTerminate();
 }
 

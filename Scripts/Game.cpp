@@ -185,10 +185,6 @@ void Game::Do()
     Shader* lightShader = ShaderManager::GetInstance().Get("Light");    
 
     glm::vec3 lightPos(1.2f, 1.f, 2.f);
-    glm::mat4 lightModel = glm::mat4(1.f);
-    lightModel = glm::translate(lightModel, lightPos);
-    float currentAngle = glm::atan(1.f / 1.2f);
-    lightModel = glm::scale(lightModel, glm::vec3(0.2f));
 
     auto window = WindowManager::GetInstance().GetWindow();
 
@@ -255,10 +251,21 @@ void Game::Do()
         glm::mat4 view = camera.GetViewMatrix();
         // ourShader->setMat4("view", view);
 
+        glm::vec3 lightColor;
+        lightColor.x = sin(glfwGetTime() * 2.0f);
+        lightColor.y = sin(glfwGetTime() * 0.7f);
+        lightColor.z = sin(glfwGetTime() * 1.3f);
+        
+        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); 
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); 
+        
         glm::mat4 model = glm::mat4(1.0f);
         cubeShader->use();
         // cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        cubeShader->setVec3("lightColor", 1.f, 1.f, 1.f);
+        cubeShader->setVec3("light.ambient", ambientColor);
+        cubeShader->setVec3("light.diffuse", diffuseColor);
+        cubeShader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+        cubeShader->setVec3("light.position", glm::vec3(view * glm::vec4(lightPos.x, lightPos.y, lightPos.z, 1.0f)));
         cubeShader->setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
         cubeShader->setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
         cubeShader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);

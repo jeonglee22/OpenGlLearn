@@ -430,6 +430,7 @@
     <None Include="Scripts\Shaders\ex1.fs" />
     <None Include="Scripts\Shaders\ex1.vs" />
     <None Include="Scripts\Shaders\light.fs" />
+    <None Include="Scripts\Shaders\light.vs" />
     <None Include="Scripts\Shaders\object.vs" />
     <None Include="Scripts\Shaders\object.fs" />
   </ItemGroup>

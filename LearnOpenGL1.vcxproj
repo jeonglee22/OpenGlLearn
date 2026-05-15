@@ -429,6 +429,9 @@
     <None Include="includes\glm\gtx\wrap.inl" />
     <None Include="Scripts\Shaders\ex1.fs" />
     <None Include="Scripts\Shaders\ex1.vs" />
+    <None Include="Scripts\Shaders\light.fs" />
+    <None Include="Scripts\Shaders\object.vs" />
+    <None Include="Scripts\Shaders\object.fs" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />

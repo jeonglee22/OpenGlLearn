@@ -36,7 +36,7 @@ void Game::Do()
     // -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
     // };  
 
-    float vertices[] = {
+    float verticesTex[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -80,6 +80,50 @@ void Game::Do()
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
+    float vertices[] = {
+        -0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f,  0.5f, -0.5f,
+        0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f, -0.5f,  0.5f,
+        0.5f, -0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+
+        0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,
+
+        -0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f,  0.5f,
+        0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f,  0.5f, -0.5f,
+        0.5f,  0.5f, -0.5f,
+        0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f
+    };
+
     glm::vec3 cubePositions[] = {
         glm::vec3( 0.0f,  0.0f,  0.0f), 
         glm::vec3( 2.0f,  5.0f, -15.0f), 
@@ -108,7 +152,7 @@ void Game::Do()
 
     VAO vao;
     VBO ebo(GL_ELEMENT_ARRAY_BUFFER, indices, sizeof(indices));
-    VBO vbo(GL_ARRAY_BUFFER, vertices, sizeof(vertices));
+    VBO vbo(GL_ARRAY_BUFFER, verticesTex, sizeof(verticesTex));
 
     vao.Bind();
     vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), (void*)0);
@@ -116,14 +160,27 @@ void Game::Do()
     ebo.Bind();
     vao.UnBind();
 
+    VAO cubeVAO;
+    VBO cubeVBO(GL_ARRAY_BUFFER, vertices, sizeof(vertices));
+
+    cubeVAO.Bind();
+    cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+    cubeVAO.UnBind();
+
     // uncomment this call to draw in wireframe polygons.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     Shader* ourShader = ShaderManager::GetInstance().Get("Base");
-    ourShader->use(); // don't forget to activate/use the shader before setting uniforms!
-    // either set it manually like so:
+    ourShader->use();
     ourShader->setInt("texture1", 0);
-    // or set it via the texture class
     ourShader->setInt("texture2", 1);
+
+    Shader* cubeShader = ShaderManager::GetInstance().Get("Cube");
+    Shader* lightShader = ShaderManager::GetInstance().Get("Light");    
+
+    glm::vec3 lightPos(1.2f, 1.f, 2.f);
+    glm::mat4 lightModel = glm::mat4(1.f);
+    lightModel = glm::translate(lightModel, lightPos);
+    lightModel = glm::scale(lightModel, glm::vec3(0.2f));
 
     auto window = WindowManager::GetInstance().GetWindow();
 
@@ -170,39 +227,61 @@ void Game::Do()
         // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         // int viewLoc = glGetUniformLocation(ourShader.ID, "view");
         // glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        ourShader->setMat4("projection", projection);
+        // ourShader->setMat4("projection", projection);
 
         // float timeValue = glfwGetTime();
         // float greenValue = sin(timeValue) / 2.0f + 0.5f;
         // int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
         // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
-        glActiveTexture(GL_TEXTURE0);
-        texture1.Bind();
-        glActiveTexture(GL_TEXTURE1);
-        texture2.Bind();
+        // glActiveTexture(GL_TEXTURE0);
+        // texture1.Bind();
+        // glActiveTexture(GL_TEXTURE1);
+        // texture2.Bind();
 
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader->setMat4("view", view);
+        // ourShader->setMat4("view", view);
 
-        vao.Bind();
-        for(unsigned int i = 0; i < 10; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i; 
-            // if (i % 3 == 0)
-            //     angle = glfwGetTime() * 30.f;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            ourShader->setMat4("model", model);
+        glm::mat4 model = glm::mat4(1.0f);
+        cubeShader->use();
+        cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        cubeShader->setVec3("lightColor", 1.f, 1.f, 1.f);
+        
+        cubeShader->setMat4("projection", projection);
+        cubeShader->setMat4("view", view);
+        cubeShader->setMat4("model", model);
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        // render the cube
+        cubeVAO.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        // vao.Bind();
+        // for(unsigned int i = 0; i < 10; i++)
+        // {
+        //     glm::mat4 model = glm::mat4(1.0f);
+        //     model = glm::translate(model, cubePositions[i]);
+        //     float angle = 20.0f * i; 
+        //     // if (i % 3 == 0)
+        //     //     angle = glfwGetTime() * 30.f;
+        //     model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+        //     ourShader->setMat4("model", model);
+
+        //     glDrawArrays(GL_TRIANGLES, 0, 36);
+        // }
 
         // glBindVertexArray(VAO1);
         // glDrawArrays(GL_TRIANGLES, 0, 36);
         // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         vao.UnBind();
+
+        lightShader->use();
+        lightShader->setMat4("model", lightModel);
+        lightShader->setMat4("projection", projection);
+        lightShader->setMat4("view", view);
+        cubeVAO.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        cubeVAO.UnBind();
+
 
         // trans = mat4(1.0f);
         // // trans = rotate(trans, (float)glfwGetTime(), vec3(0.0, 0.0, 1.0));

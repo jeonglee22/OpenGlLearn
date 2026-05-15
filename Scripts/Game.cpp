@@ -81,48 +81,49 @@ void Game::Do()
     };
 
     float vertices[] = {
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    // positions          // normals           // texture coords
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
 
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-    };
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
+};
 
     glm::vec3 cubePositions[] = {
         glm::vec3( 0.0f,  0.0f,  0.0f), 
@@ -147,8 +148,9 @@ void Game::Do()
     //         glm::vec3(0.0f, 0.0f, 0.0f), 
     //         glm::vec3(0.0f, 1.0f, 0.0f));
     
-    Texture texture1("assets/images/container.jpg", TextureDataType::INT);
-    Texture texture2("assets/images/awesomeface.png", TextureDataType::INT);
+    Texture texture1("Assets/Images/container.jpg", TextureDataType::INT);
+    Texture texture2("Assets/Images/awesomeface.png", TextureDataType::INT);
+    Texture texture3("Assets/Images/container2.png", TextureDataType::INT);
 
     VAO vao;
     VBO ebo(GL_ELEMENT_ARRAY_BUFFER, indices, sizeof(indices));
@@ -164,22 +166,23 @@ void Game::Do()
     VBO cubeVBO(GL_ARRAY_BUFFER, vertices, sizeof(vertices));
 
     cubeVAO.Bind();
-    cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
-    cubeVAO.LinkAttrib(cubeVBO, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+    cubeVAO.LinkAttrib(cubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    cubeVAO.LinkAttrib(cubeVBO, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     cubeVAO.UnBind();
 
     VAO lightVAO;
 
     lightVAO.Bind();
-    lightVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+    lightVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
     lightVAO.UnBind();
 
     // uncomment this call to draw in wireframe polygons.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    Shader* ourShader = ShaderManager::GetInstance().Get("Base");
-    ourShader->use();
-    ourShader->setInt("texture1", 0);
-    ourShader->setInt("texture2", 1);
+    // Shader* ourShader = ShaderManager::GetInstance().Get("Base");
+    // ourShader->use();
+    // ourShader->setInt("texture1", 0);
+    // ourShader->setInt("texture2", 1);
 
     Shader* cubeShader = ShaderManager::GetInstance().Get("Cube");
     Shader* lightShader = ShaderManager::GetInstance().Get("Light");    
@@ -251,26 +254,27 @@ void Game::Do()
         glm::mat4 view = camera.GetViewMatrix();
         // ourShader->setMat4("view", view);
 
-        glm::vec3 lightColor;
-        lightColor.x = sin(glfwGetTime() * 2.0f);
-        lightColor.y = sin(glfwGetTime() * 0.7f);
-        lightColor.z = sin(glfwGetTime() * 1.3f);
+        // glm::vec3 lightColor;
+        // lightColor.x = sin(glfwGetTime() * 2.0f);
+        // lightColor.y = sin(glfwGetTime() * 0.7f);
+        // lightColor.z = sin(glfwGetTime() * 1.3f);
         
-        glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); 
-        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); 
+        // glm::vec3 diffuseColor = lightColor   * glm::vec3(0.5f); 
+        // glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); 
         
         glm::mat4 model = glm::mat4(1.0f);
         cubeShader->use();
         // cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        cubeShader->setVec3("light.ambient", ambientColor);
-        cubeShader->setVec3("light.diffuse", diffuseColor);
+        cubeShader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+        cubeShader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
         cubeShader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
         cubeShader->setVec3("light.position", glm::vec3(view * glm::vec4(lightPos.x, lightPos.y, lightPos.z, 1.0f)));
-        cubeShader->setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
-        cubeShader->setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        cubeShader->setInt("material.diffuse", 0);
+        glActiveTexture(GL_TEXTURE0);
+        texture3.Bind();
         cubeShader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-        cubeShader->setFloat("material.shininess", 32.0f);
-        cubeShader->setVec3("lightPos", lightPos);
+        cubeShader->setFloat("material.shininess", 64.0f);
+        // cubeShader->setVec3("lightPos", lightPos);
         // cubeShader->setVec3("viewPos", camera.Position);
 
         cubeShader->setMat4("projection", projection);
@@ -309,6 +313,7 @@ void Game::Do()
         lightShader->setMat4("model", lightModel);
         lightShader->setMat4("projection", projection);
         lightShader->setMat4("view", view);
+        // lightShader->setVec3("LightColor", lightColor);
         lightVAO.Bind();
         glDrawArrays(GL_TRIANGLES, 0, 36);
         lightVAO.UnBind();

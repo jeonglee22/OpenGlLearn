@@ -131,6 +131,7 @@
   <ItemGroup>
     <Image Include="Assets\Images\awesomeface.png" />
     <Image Include="Assets\Images\container.jpg" />
+    <Image Include="Assets\Images\container2.png" />
     <Image Include="Assets\Images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>

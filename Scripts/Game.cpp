@@ -278,6 +278,7 @@ void Game::Do()
         // cubeShader->setVec3("light.position", glm::vec3(view * glm::vec4(lightPos.x, lightPos.y, lightPos.z, 1.0f)));
         cubeShader->setVec3("light.position", camera.Position);
         cubeShader->setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+        cubeShader->setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
         cubeShader->setFloat("light.constant",  1.0f);
         cubeShader->setFloat("light.linear",    0.09f);
         cubeShader->setFloat("light.quadratic", 0.032f);

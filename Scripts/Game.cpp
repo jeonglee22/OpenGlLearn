@@ -151,6 +151,7 @@ void Game::Do()
     Texture texture1("Assets/Images/container.jpg", TextureDataType::INT);
     Texture texture2("Assets/Images/awesomeface.png", TextureDataType::INT);
     Texture texture3("Assets/Images/container2.png", TextureDataType::INT);
+    Texture containerSpecular("Assets/Images/container2_specular.png", TextureDataType::INT);
 
     VAO vao;
     VBO ebo(GL_ELEMENT_ARRAY_BUFFER, indices, sizeof(indices));
@@ -272,7 +273,9 @@ void Game::Do()
         cubeShader->setInt("material.diffuse", 0);
         glActiveTexture(GL_TEXTURE0);
         texture3.Bind();
-        cubeShader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        cubeShader->setInt("material.specular", 1);
+        glActiveTexture(GL_TEXTURE1);
+        containerSpecular.Bind();
         cubeShader->setFloat("material.shininess", 64.0f);
         // cubeShader->setVec3("lightPos", lightPos);
         // cubeShader->setVec3("viewPos", camera.Position);

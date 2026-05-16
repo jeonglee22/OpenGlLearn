@@ -7,7 +7,8 @@ struct Material {
 }; 
 
 struct Light {
-    vec3 position;
+    // vec3 position;
+    vec3 direction;
   
     vec3 ambient;
     vec3 diffuse;
@@ -30,12 +31,13 @@ void main()
     vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
 
     vec3 norm = normalize(Normal);
-    vec3 ligthDir = normalize(light.position - FragPos);
-    float diff = max(dot(ligthDir, norm), 0.0);
+    // vec3 lightDir = normalize(light.position - FragPos);
+    vec3 lightDir = normalize(-light.direction);
+    float diff = max(dot(lightDir, norm), 0.0);
     vec3 diffuse = light.diffuse * (diff * vec3(texture(material.diffuse, TexCoords)));
 
     vec3 viewDir = normalize(-FragPos);
-    vec3 reflectDir = reflect(-ligthDir, norm);
+    vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specularTex = vec3(texture(material.specular, TexCoords));
     vec3 specular = light.specular * (spec * specularTex); 

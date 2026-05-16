@@ -269,11 +269,15 @@ void Game::Do()
         glm::mat4 model = glm::mat4(1.0f);
         cubeShader->use();
         // cubeShader->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        cubeShader->setVec3("viewPos", camera.Position);
         // cubeShader->setVec3("light.direction", -0.2f, -1.0f, -0.3f); 
-        cubeShader->setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-        cubeShader->setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        cubeShader->setVec3("light.direction", camera.Front); 
+        cubeShader->setVec3("light.ambient", 0.1f, 0.1f, 0.1f);
+        cubeShader->setVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
         cubeShader->setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-        cubeShader->setVec3("light.position", glm::vec3(view * glm::vec4(lightPos.x, lightPos.y, lightPos.z, 1.0f)));
+        // cubeShader->setVec3("light.position", glm::vec3(view * glm::vec4(lightPos.x, lightPos.y, lightPos.z, 1.0f)));
+        cubeShader->setVec3("light.position", camera.Position);
+        cubeShader->setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
         cubeShader->setFloat("light.constant",  1.0f);
         cubeShader->setFloat("light.linear",    0.09f);
         cubeShader->setFloat("light.quadratic", 0.032f);
@@ -286,9 +290,8 @@ void Game::Do()
         // cubeShader->setInt("material.emission", 2);
         // glActiveTexture(GL_TEXTURE2);
         // containerEmission.Bind();
-        cubeShader->setFloat("material.shininess", 64.0f);
+        cubeShader->setFloat("material.shininess", 32.0f);
         // cubeShader->setVec3("lightPos", lightPos);
-        // cubeShader->setVec3("viewPos", camera.Position);
 
         cubeShader->setMat4("projection", projection);
         cubeShader->setMat4("view", view);

@@ -27,6 +27,18 @@
     <Image Include="Assets\Images\container2.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Assets\Images\container2_specular.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Assets\Images\container2_specular_color.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Assets\Images\lighting_maps_specular_color.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Assets\Images\matrix.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Camera.h">
@@ -518,6 +530,261 @@
     <ClInclude Include="Scripts\Managers\ShaderManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="includes\assimp\Compiler\poppack1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Compiler\pstdint.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Compiler\pushpack1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\port\AndroidJNI\AndroidJNIIOSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\port\AndroidJNI\BundledAssetIOSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\aabb.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ai_assert.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\anim.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\AssertHandler.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Base64.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\BaseImporter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Bitmap.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\BlobIOSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ByteSwapper.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\camera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\cexport.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\cfileio.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\cimport.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ColladaMetaData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\color4.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\commonMetaData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\config.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\CreateAnimMesh.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\DefaultIOStream.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\DefaultIOSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\DefaultLogger.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\defs.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Exceptional.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Exporter.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\fast_atof.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\GenericProperty.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\GltfMaterial.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Hash.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Importer.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\importerdesc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\IOStream.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\IOStreamBuffer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\IOSystem.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\light.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\LineSplitter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\LogAux.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Logger.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\LogStream.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\material.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\MathFunctions.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\matrix3x3.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\matrix4x4.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\MemoryIOWrapper.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\mesh.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\metadata.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\NullLogger.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ObjMaterial.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ParsingUtils.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\pbrmaterial.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\postprocess.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Profiler.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ProgressHandler.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\qnan.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\quaternion.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\RemoveComments.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\revision.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SceneCombiner.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SGSpatialSort.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SkeletonMeshBuilder.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SmallVector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SmoothingGroups.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\SpatialSort.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\StandardShapes.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\StreamReader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\StreamWriter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\StringComparison.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\StringUtils.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Subdivision.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\texture.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\TinyFormatter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\types.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\vector2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\vector3.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\version.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\Vertex.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\XmlParser.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\XMLTools.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\assimp\ZipArchiveIOSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Mesh.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scripts\Game.cpp">
@@ -560,6 +827,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Managers\ShaderManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Mesh.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -904,9 +1174,35 @@
     <None Include="Scripts\Shaders\light.fs" />
     <None Include="Scripts\Shaders\object.fs" />
     <None Include="Scripts\Shaders\light.vs" />
+    <None Include="includes\assimp\color4.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\material.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\matrix3x3.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\matrix4x4.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\quaternion.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\SmoothingGroups.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\vector2.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="includes\assimp\vector3.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="lib\assimp-vc143-mtd.exp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
     <Library Include="lib\glfw3_mt.lib" />
+    <Library Include="lib\assimp-vc143-mtd.lib" />
   </ItemGroup>
 </Project>

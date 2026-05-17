@@ -108,8 +108,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /E /Y /I "$(ProjectDir)Scripts\Shaders" "$(OutDir)Scripts\Shaders\"
+xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -125,16 +130,110 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /E /Y /I "$(ProjectDir)Scripts\Shaders" "$(OutDir)Scripts\Shaders\"
+xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Image Include="Assets\Images\awesomeface.png" />
     <Image Include="Assets\Images\container.jpg" />
     <Image Include="Assets\Images\container2.png" />
+    <Image Include="Assets\Images\container2_specular.png" />
+    <Image Include="Assets\Images\container2_specular_color.png" />
+    <Image Include="Assets\Images\lighting_maps_specular_color.png" />
+    <Image Include="Assets\Images\matrix.jpg" />
     <Image Include="Assets\Images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\assimp\aabb.h" />
+    <ClInclude Include="includes\assimp\ai_assert.h" />
+    <ClInclude Include="includes\assimp\anim.h" />
+    <ClInclude Include="includes\assimp\AssertHandler.h" />
+    <ClInclude Include="includes\assimp\Base64.hpp" />
+    <ClInclude Include="includes\assimp\BaseImporter.h" />
+    <ClInclude Include="includes\assimp\Bitmap.h" />
+    <ClInclude Include="includes\assimp\BlobIOSystem.h" />
+    <ClInclude Include="includes\assimp\ByteSwapper.h" />
+    <ClInclude Include="includes\assimp\camera.h" />
+    <ClInclude Include="includes\assimp\cexport.h" />
+    <ClInclude Include="includes\assimp\cfileio.h" />
+    <ClInclude Include="includes\assimp\cimport.h" />
+    <ClInclude Include="includes\assimp\ColladaMetaData.h" />
+    <ClInclude Include="includes\assimp\color4.h" />
+    <ClInclude Include="includes\assimp\commonMetaData.h" />
+    <ClInclude Include="includes\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="includes\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="includes\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="includes\assimp\config.h" />
+    <ClInclude Include="includes\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="includes\assimp\DefaultIOStream.h" />
+    <ClInclude Include="includes\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="includes\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="includes\assimp\defs.h" />
+    <ClInclude Include="includes\assimp\Exceptional.h" />
+    <ClInclude Include="includes\assimp\Exporter.hpp" />
+    <ClInclude Include="includes\assimp\fast_atof.h" />
+    <ClInclude Include="includes\assimp\GenericProperty.h" />
+    <ClInclude Include="includes\assimp\GltfMaterial.h" />
+    <ClInclude Include="includes\assimp\Hash.h" />
+    <ClInclude Include="includes\assimp\Importer.hpp" />
+    <ClInclude Include="includes\assimp\importerdesc.h" />
+    <ClInclude Include="includes\assimp\IOStream.hpp" />
+    <ClInclude Include="includes\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="includes\assimp\IOSystem.hpp" />
+    <ClInclude Include="includes\assimp\light.h" />
+    <ClInclude Include="includes\assimp\LineSplitter.h" />
+    <ClInclude Include="includes\assimp\LogAux.h" />
+    <ClInclude Include="includes\assimp\Logger.hpp" />
+    <ClInclude Include="includes\assimp\LogStream.hpp" />
+    <ClInclude Include="includes\assimp\material.h" />
+    <ClInclude Include="includes\assimp\MathFunctions.h" />
+    <ClInclude Include="includes\assimp\matrix3x3.h" />
+    <ClInclude Include="includes\assimp\matrix4x4.h" />
+    <ClInclude Include="includes\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="includes\assimp\mesh.h" />
+    <ClInclude Include="includes\assimp\metadata.h" />
+    <ClInclude Include="includes\assimp\NullLogger.hpp" />
+    <ClInclude Include="includes\assimp\ObjMaterial.h" />
+    <ClInclude Include="includes\assimp\ParsingUtils.h" />
+    <ClInclude Include="includes\assimp\pbrmaterial.h" />
+    <ClInclude Include="includes\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="includes\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="includes\assimp\postprocess.h" />
+    <ClInclude Include="includes\assimp\Profiler.h" />
+    <ClInclude Include="includes\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="includes\assimp\qnan.h" />
+    <ClInclude Include="includes\assimp\quaternion.h" />
+    <ClInclude Include="includes\assimp\RemoveComments.h" />
+    <ClInclude Include="includes\assimp\revision.h" />
+    <ClInclude Include="includes\assimp\scene.h" />
+    <ClInclude Include="includes\assimp\SceneCombiner.h" />
+    <ClInclude Include="includes\assimp\SGSpatialSort.h" />
+    <ClInclude Include="includes\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="includes\assimp\SmallVector.h" />
+    <ClInclude Include="includes\assimp\SmoothingGroups.h" />
+    <ClInclude Include="includes\assimp\SpatialSort.h" />
+    <ClInclude Include="includes\assimp\StandardShapes.h" />
+    <ClInclude Include="includes\assimp\StreamReader.h" />
+    <ClInclude Include="includes\assimp\StreamWriter.h" />
+    <ClInclude Include="includes\assimp\StringComparison.h" />
+    <ClInclude Include="includes\assimp\StringUtils.h" />
+    <ClInclude Include="includes\assimp\Subdivision.h" />
+    <ClInclude Include="includes\assimp\texture.h" />
+    <ClInclude Include="includes\assimp\TinyFormatter.h" />
+    <ClInclude Include="includes\assimp\types.h" />
+    <ClInclude Include="includes\assimp\vector2.h" />
+    <ClInclude Include="includes\assimp\vector3.h" />
+    <ClInclude Include="includes\assimp\version.h" />
+    <ClInclude Include="includes\assimp\Vertex.h" />
+    <ClInclude Include="includes\assimp\XmlParser.h" />
+    <ClInclude Include="includes\assimp\XMLTools.h" />
+    <ClInclude Include="includes\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="Scripts\Mesh.h" />
     <ClInclude Include="Scripts\Managers\GameObject.h" />
     <ClInclude Include="Scripts\Camera.h" />
     <ClInclude Include="Scripts\Game.h" />
@@ -300,6 +399,7 @@
     <ClInclude Include="Scripts\Managers\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Mesh.cpp" />
     <ClCompile Include="Scripts\Managers\GameObject.cpp" />
     <ClCompile Include="Scripts\Game.cpp" />
     <ClCompile Include="includes\glad.c" />
@@ -317,6 +417,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="includes\assimp\color4.inl" />
+    <None Include="includes\assimp\material.inl" />
+    <None Include="includes\assimp\matrix3x3.inl" />
+    <None Include="includes\assimp\matrix4x4.inl" />
+    <None Include="includes\assimp\quaternion.inl" />
+    <None Include="includes\assimp\SmoothingGroups.inl" />
+    <None Include="includes\assimp\vector2.inl" />
+    <None Include="includes\assimp\vector3.inl" />
     <None Include="includes\glm\detail\func_common.inl" />
     <None Include="includes\glm\detail\func_common_simd.inl" />
     <None Include="includes\glm\detail\func_exponential.inl" />
@@ -428,6 +536,7 @@
     <None Include="includes\glm\gtx\vector_angle.inl" />
     <None Include="includes\glm\gtx\vector_query.inl" />
     <None Include="includes\glm\gtx\wrap.inl" />
+    <None Include="lib\assimp-vc143-mtd.exp" />
     <None Include="Scripts\Shaders\ex1.fs" />
     <None Include="Scripts\Shaders\ex1.vs" />
     <None Include="Scripts\Shaders\light.fs" />
@@ -436,6 +545,7 @@
     <None Include="Scripts\Shaders\object.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="lib\assimp-vc143-mtd.lib" />
     <Library Include="lib\glfw3.lib" />
     <Library Include="lib\glfw3_mt.lib" />
   </ItemGroup>

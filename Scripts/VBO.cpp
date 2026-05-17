@@ -1,7 +1,12 @@
 #include "VBO.h"
 
-VBO::VBO(GLenum target, const void* data, GLsizeiptr size, GLenum usage)
-	: target(target), bufferSize(1)
+VBO::VBO()
+{
+	glGenBuffers(1, &ID);
+}
+
+VBO::VBO(GLenum target, const void *data, GLsizeiptr size, GLenum usage)
+    : target(target), bufferSize(1)
 {
 	glGenBuffers(1, &ID);
 	glBindBuffer(target, ID);
@@ -12,6 +17,13 @@ VBO::VBO(unsigned int bufferSize, GLenum target, const void* data, GLsizeiptr si
 	: target(target), bufferSize(bufferSize)
 {
 	glGenBuffers(bufferSize, &ID);
+	glBindBuffer(target, ID);
+	glBufferData(target, size, data, usage);
+}
+
+void VBO::SetBuffer(GLenum target, const void *data, GLsizeiptr size, GLenum usage)
+{
+	this->target = target;
 	glBindBuffer(target, ID);
 	glBufferData(target, size, data, usage);
 }

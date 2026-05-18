@@ -1,8 +1,9 @@
 #include "SceneManager.h"
+#include "TestScene.h"
 
 void SceneManager::Init()
 {
-	scenes.insert({ SceneId::Test, new Scene(SceneId::Test) });
+	scenes.insert({ SceneId::Test, new TestScene(SceneId::Test) });
 	scenes.insert({ SceneId::Start, new Scene(SceneId::Start) });
 
 	for (auto scene : scenes)
@@ -27,12 +28,9 @@ void SceneManager::Update(float dt)
 	scenes[currentScene]->Update(dt);
 }
 
-void SceneManager::Render(GLFWwindow* window)
+void SceneManager::Render()
 {
-	glClearColor(0.f, 0.f, 0.f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	scenes[currentScene]->Render(window);
+	scenes[currentScene]->Render();
 }
 
 void SceneManager::Release()

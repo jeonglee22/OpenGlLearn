@@ -11,7 +11,7 @@ class SceneManager : public Singleton<SceneManager>
 public:
 	void Init();
 	void Update(float dt);
-	void Render(GLFWwindow* window);
+	void Render();
 	void Release();
 	void LoadScene(SceneId nextScene);
 

@@ -17,10 +17,10 @@ public:
 	virtual void Init() {}
 	virtual void Start() {}
 	virtual void Update(float dt) {}
-	virtual void Render(GLFWwindow* window) {}
+	virtual void Render() {}
 	virtual void Release() {}
 
-	glm::mat4 GetModelMatrix() {return modelMatrix; }
+	glm::mat4 GetModelMatrix() const {return modelMatrix; }
 	void SetModelMatrix();
 
 	void SetPosition(glm::vec3 position) { transform.position = position; SetModelMatrix(); }

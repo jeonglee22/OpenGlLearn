@@ -31,10 +31,10 @@ void Scene::Update(float dt) {
 	}
 }
 
-void Scene::Render(GLFWwindow* window) {
+void Scene::Render() {
 	for (auto go : gameObjects)
 	{
-		go->Render(window);
+		go->Render();
 	}
 }
 

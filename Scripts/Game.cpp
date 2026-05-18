@@ -27,6 +27,7 @@ void Game::Init()
 {
     WindowManager::GetInstance().Init();
     ShaderManager::GetInstance().Init();
+    stbi_set_flip_vertically_on_load(true);
     SceneManager::GetInstance().Init();
 }
 
@@ -200,13 +201,11 @@ void Game::Do()
     // ourShader->setInt("texture1", 0);
     // ourShader->setInt("texture2", 1);
 
-    stbi_set_flip_vertically_on_load(true);
-
     Shader* cubeShader = ShaderManager::GetInstance().Get("Cube");
     Shader* lightShader = ShaderManager::GetInstance().Get("Light");   
     Shader* modelShader = ShaderManager::GetInstance().Get("Model");
     
-    Model ourModel(FileSystem::getPath("Assets/Models/backpack/backpack.obj").c_str());
+    // Model ourModel(FileSystem::getPath("Assets/Models/backpack/backpack.obj").c_str());
 
     glm::vec3 lightPos(1.2f, 1.f, 2.f);
 
@@ -228,8 +227,8 @@ void Game::Do()
 
         SceneManager::GetInstance().Update(deltaTime);
 
-
-        SceneManager::GetInstance().Render(window);
+        glClearColor(0.f, 0.f, 0.f, 1.0f);
+	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // mat4 trans = mat4(1.0f);
         // // trans = rotate(trans, (float)glfwGetTime(), vec3(0.0, 0.0, 1.0));
@@ -404,7 +403,7 @@ void Game::Do()
         modelShader->setMat4("projection", projection);
         modelShader->setMat4("view",view);
 
-        cubeShader->setVec3("viewPos", camera.Position);
+        modelShader->setVec3("viewPos", camera.Position);
         modelShader->setVec3("pointLight.position", lightPos);
         modelShader->setVec3("pointLight.ambient", 0.05f, 0.05f, 0.05f);
         modelShader->setVec3("pointLight.diffuse", 0.8f, 0.8f, 0.8f);
@@ -413,12 +412,12 @@ void Game::Do()
         modelShader->setFloat("pointLight.linear", 0.09f);
         modelShader->setFloat("pointLight.quadratic", 0.032f);
 
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::rotate(model, currentFrame, glm::vec3(0.0f,1.0f,0.0f));
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        modelShader->setMat4("model", model);
-        ourModel.Draw(*modelShader);
+        // glm::mat4 model = glm::mat4(1.0f);
+        // model = glm::rotate(model, currentFrame, glm::vec3(0.0f,1.0f,0.0f));
+        // model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        // model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        // modelShader->setMat4("model", model);
+        // ourModel.Draw(*modelShader);
 
         lightShader->use();
         glm::mat4 lightModel = glm::mat4(1.f);
@@ -443,6 +442,7 @@ void Game::Do()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         lightVAO.UnBind();
 
+        SceneManager::GetInstance().Render();
 
         // trans = mat4(1.0f);
         // // trans = rotate(trans, (float)glfwGetTime(), vec3(0.0, 0.0, 1.0));

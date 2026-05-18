@@ -240,6 +240,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClInclude Include="includes\assimp\XmlParser.h" />
     <ClInclude Include="includes\assimp\XMLTools.h" />
     <ClInclude Include="includes\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="Scripts\ModelObject.h" />
     <ClInclude Include="Scripts\filesystem.h" />
     <ClInclude Include="Scripts\Mesh.h" />
     <ClInclude Include="Scripts\Managers\GameObject.h" />
@@ -406,8 +407,10 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClInclude Include="Scripts\VAO.h" />
     <ClInclude Include="Scripts\VBO.h" />
     <ClInclude Include="Scripts\Managers\ShaderManager.h" />
+    <ClInclude Include="Scripts\TestScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\ModelObject.cpp" />
     <ClCompile Include="Scripts\Mesh.cpp" />
     <ClCompile Include="Scripts\Managers\GameObject.cpp" />
     <ClCompile Include="Scripts\Game.cpp" />
@@ -425,6 +428,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClCompile Include="Scripts\VAO.cpp" />
     <ClCompile Include="Scripts\VBO.cpp" />
     <ClCompile Include="Scripts\Managers\ShaderManager.cpp" />
+    <ClCompile Include="Scripts\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

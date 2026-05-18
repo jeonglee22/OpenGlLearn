@@ -7,19 +7,19 @@ class Scene
 {
 public:
 	Scene(SceneId sceneId);
-	~Scene() = default;
+	virtual ~Scene() = default;
 
 	virtual void Init();
 	virtual void Enter();
 	virtual void Exit();
 	virtual void Update(float dt);
-	virtual void Render(GLFWwindow* window);
+	virtual void Render();
 	virtual void Release();
 
 	void AddGameObject(GameObject* go);
 	void RemoveGameObject(GameObject* go = NULL);
 
-private:
+protected:
 	SceneId sceneId;
 	std::list<GameObject*> gameObjects;
 

@@ -13,6 +13,23 @@ public:
   
     // constructor reads and builds the shader
     Shader(const char* vertexPath, const char* fragmentPath);
+    ~Shader() { glDeleteProgram(ID); }
+
+    // 복사 금지
+    Shader(const Shader&) = delete;
+    Shader& operator=(const Shader&) = delete;
+
+    // 이동 허용
+    Shader(Shader&& other) noexcept : ID(other.ID) { other.ID = 0; }
+    Shader& operator=(Shader&& other) noexcept {
+        if (this != &other) {
+            glDeleteProgram(ID);
+            ID = other.ID;
+            other.ID = 0;
+        }
+        return *this;
+    }
+
     // use/activate the shader
     void use();
     // utility uniform functions

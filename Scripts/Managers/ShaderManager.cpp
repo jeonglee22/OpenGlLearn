@@ -1,8 +1,7 @@
 #include "ShaderManager.h"
 
 void ShaderManager::Load(const std::string& name, const char* vertPath, const char* fragPath) {
-	Shader shader(vertPath, fragPath);
-	shaders.insert({name, shader});
+	shaders.emplace(name, Shader(vertPath, fragPath));
 }
 
 Shader* ShaderManager::Get(const std::string& name) {

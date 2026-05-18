@@ -1,0 +1,84 @@
+================================================================
+엔진 기반 로드맵
+================================================================
+
+----------------------------------------------------------------
+1단계 - 렌더링 기반 완성
+----------------------------------------------------------------
+
+1. ShaderManager 복사 버그 수정
+   shaders.insert({name, shader})에서 Shader가 복사될 때 GL 프로그램 ID가
+   중복 소유됩니다. emplace로 바꾸거나 Shader에 이동 생성자를 추가해서
+   VAO/VBO처럼 안전하게 만드는 작업입니다.
+
+2. Transform::GetModelMatrix()
+   GameObject에 position/rotation/scale은 있는데 이를 glm::mat4로 변환하는
+   함수가 없습니다. translate * rotate * scale 순서로 행렬을 만들어 반환하는
+   함수를 추가합니다.
+
+3. ModelObject : GameObject
+   현재 Model이 Game::Do() 렌더 루프에 직접 박혀 있습니다.
+   GameObject를 상속받는 ModelObject 클래스를 만들어
+   Scene::AddGameObject()로 관리하게 통합합니다.
+
+4. ResourceManager
+   같은 경로의 텍스처나 모델을 여러 오브젝트가 쓸 때 지금은 매번 새로 로딩합니다.
+   경로를 키로 캐싱해두고 이미 로딩된 리소스는 재사용하는 매니저입니다.
+
+----------------------------------------------------------------
+2단계 - 엔진 시스템
+----------------------------------------------------------------
+
+5. TimeManager
+   deltaTime이 현재 Game 클래스에만 있어서 GameObject에서 접근이 안 됩니다.
+   Time::DeltaTime() 같은 전역 접근 포인트를 만듭니다.
+
+6. InputManager
+   현재 GLFW 키 폴링이 Game::ProcessInput()에만 있습니다.
+   키/마우스 상태를 프레임마다 캐싱해서 어느 GameObject에서도
+   Input::GetKey(GLFW_KEY_W) 형태로 접근할 수 있게 합니다.
+
+7. Component 시스템
+   GameObject가 모든 역할을 직접 갖는 대신, MeshRenderer, Light, Collider 같은
+   컴포넌트를 붙였다 뗐다 할 수 있는 구조입니다.
+   Unity의 AddComponent<T>() 방식이 대표적입니다.
+
+8. EventSystem
+   오브젝트 간 직접 참조 없이 메시지로 통신하는 구조입니다.
+   예를 들어 충돌이 발생하면 OnCollision 이벤트를 발행하고,
+   관심 있는 오브젝트들이 구독해서 반응합니다.
+
+----------------------------------------------------------------
+3단계 - 렌더러 분리
+----------------------------------------------------------------
+
+9. Renderer 클래스 분리
+   현재 렌더링 코드가 Game::Do()와 Scene::Render()에 섞여 있습니다.
+   Renderer 클래스가 셰이더 바인딩, 유니폼 설정, Draw Call을 전담하게 분리합니다.
+
+10. RenderQueue
+    투명한 오브젝트는 뒤에서 앞 순서로, 불투명 오브젝트는 앞에서 뒤 순서로
+    렌더해야 올바른 결과가 나옵니다.
+    오브젝트를 바로 그리지 않고 큐에 쌓은 후 정렬해서 그리는 구조입니다.
+
+11. Light 컴포넌트
+    Directional / Point / Spot 광원이 현재 셰이더에 하드코딩되어 있습니다.
+    LightComponent를 GameObject에 붙이면 LightManager가 수집해서
+    셰이더에 자동으로 넘겨주는 구조입니다.
+
+----------------------------------------------------------------
+4단계 - 그래픽스 심화 (LearnOpenGL 순서)
+----------------------------------------------------------------
+
+Depth Testing / Stencil Testing / Blending / Face Culling
+Framebuffers / Cubemaps
+Advanced Data / Advanced GLSL / Geometry Shader
+Instancing / Anti Aliasing
+Advanced Lighting / Gamma Correction
+Shadow Mapping / Point Shadows
+Normal Mapping / Parallax Mapping
+HDR / Bloom
+Deferred Shading / SSAO
+PBR
+
+================================================================

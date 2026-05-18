@@ -8,6 +8,20 @@ public:
 	VAO();
 	VAO(unsigned int number);
 
+	VAO(const VAO&) = delete;
+	VAO& operator=(const VAO&) = delete;
+
+	VAO(VAO&& other) noexcept : ID(other.ID), arraySize(other.arraySize) { other.ID = 0; other.arraySize = 0; }
+	VAO& operator=(VAO&& other) noexcept
+	{
+		if (this != &other) {
+			glDeleteVertexArrays(arraySize, &ID);
+			ID = other.ID; arraySize = other.arraySize;
+			other.ID = 0; other.arraySize = 0;
+		}
+		return *this;
+	}
+
 	~VAO() { glDeleteVertexArrays(arraySize, &ID); }
 
 	void Bind();

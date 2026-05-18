@@ -8,7 +8,7 @@ using namespace std;
 class Model
 {
 public:
-    Model(char *path)
+    Model(const char *path)
     {
         loadModel(path);
     }
@@ -17,6 +17,8 @@ private:
     // model data
     vector<Mesh> meshes;
     string directory;
+
+    std::vector<TextureAssimp> textureLoaded;
 
     void loadModel(string path);
     void processNode(aiNode *node, const aiScene *scene);

@@ -1,6 +1,6 @@
 #include "VBO.h"
 
-VBO::VBO()
+VBO::VBO() : bufferSize(1), target(GL_ARRAY_BUFFER)
 {
 	glGenBuffers(1, &ID);
 }

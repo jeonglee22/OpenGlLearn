@@ -1,6 +1,5 @@
 #include "Model.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
@@ -16,7 +15,9 @@ void Model::loadModel(string path)
     Assimp::Importer import;
     const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);	
 	
-    if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
+    cout << "Loading model: " << path << endl;
+
+    if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
         cout << "ERROR::ASSIMP::" << import.GetErrorString() << endl;
         return;
@@ -106,11 +107,25 @@ vector<TextureAssimp> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType
     {
         aiString str;
         mat->GetTexture(type, i, &str);
+        bool skip = false;
+        for (int j = 0; j < textureLoaded.size(); j++)
+        {
+            if (std::strcmp(textureLoaded[j].path.data(), str.C_Str()) == 0)
+            {
+                textures.push_back(textureLoaded[j]);
+                skip = true;
+                break;
+            }
+        }
+
+        if (skip) continue;
+
         TextureAssimp texture;
         texture.id = TextureFromFile(str.C_Str(), directory);
         texture.type = typeName;
         texture.path = str.C_Str();
         textures.push_back(texture);
+        textureLoaded.push_back(texture);
     }
     return textures;
 }

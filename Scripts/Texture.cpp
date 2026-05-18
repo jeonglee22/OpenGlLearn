@@ -1,6 +1,5 @@
 #include "Texture.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Texture::Texture(const char* path, TextureDataType dataType, TextureWrapMode wrapS, TextureWrapMode wrapT, TextureFilterMode minFilter, TextureFilterMode magFilter)

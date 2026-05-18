@@ -17,6 +17,7 @@ void ShaderManager::Init() {
 	Load("Base", "Scripts/Shaders/ex1.vs", "Scripts/Shaders/ex1.fs");
 	Load("Light", "Scripts/Shaders/light.vs", "Scripts/Shaders/light.fs");
 	Load("Cube", "Scripts/Shaders/object.vs", "Scripts/Shaders/object.fs");
+	Load("Model", "Scripts/Shaders/model.vs", "Scripts/Shaders/model.fs");
 }
 
 void ShaderManager::Release() {

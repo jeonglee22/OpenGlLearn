@@ -35,10 +35,9 @@ void Mesh::Draw(Shader &shader)
 void Mesh::setupMesh()
 {
     vao = VAO();
+    vao.Bind();
     vbo = VBO(GL_ARRAY_BUFFER, &vertices[0], vertices.size() * sizeof(Vertex));
     ebo = VBO(GL_ELEMENT_ARRAY_BUFFER, &indices[0], indices.size() * sizeof(unsigned int));
-
-    vao.Bind();
     vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
     vao.LinkAttrib(vbo, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, normal));
     vao.LinkAttrib(vbo, 2, 2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));

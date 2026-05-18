@@ -103,6 +103,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes\;$(ProjectDir)Scripts\Managers;$(ProjectDir)Scripts;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,6 +126,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes\;$(ProjectDir)Scripts\Managers;$(ProjectDir)Scripts;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,6 +149,11 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <Image Include="Assets\Images\lighting_maps_specular_color.png" />
     <Image Include="Assets\Images\matrix.jpg" />
     <Image Include="Assets\Images\wall.jpg" />
+    <Image Include="Assets\Models\backpack\ao.jpg" />
+    <Image Include="Assets\Models\backpack\diffuse.jpg" />
+    <Image Include="Assets\Models\backpack\normal.png" />
+    <Image Include="Assets\Models\backpack\roughness.jpg" />
+    <Image Include="Assets\Models\backpack\specular.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\assimp\aabb.h" />
@@ -233,6 +240,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClInclude Include="includes\assimp\XmlParser.h" />
     <ClInclude Include="includes\assimp\XMLTools.h" />
     <ClInclude Include="includes\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="Scripts\filesystem.h" />
     <ClInclude Include="Scripts\Mesh.h" />
     <ClInclude Include="Scripts\Managers\GameObject.h" />
     <ClInclude Include="Scripts\Camera.h" />
@@ -386,6 +394,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClInclude Include="includes\glm\vec4.hpp" />
     <ClInclude Include="includes\glm\vector_relational.hpp" />
     <ClInclude Include="includes\KHR\khrplatform.h" />
+    <ClInclude Include="Scripts\Model.h" />
     <ClInclude Include="Scripts\pch.h" />
     <ClInclude Include="Scripts\Scene.h" />
     <ClInclude Include="Scripts\Managers\SceneManager.h" />
@@ -406,9 +415,11 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <ClCompile Include="includes\glm\detail\dummy.cpp" />
     <ClCompile Include="includes\glm\detail\glm.cpp" />
     <ClCompile Include="Scripts\main.cpp" />
+    <ClCompile Include="Scripts\Model.cpp" />
     <ClCompile Include="Scripts\Scene.cpp" />
     <ClCompile Include="Scripts\Managers\SceneManager.cpp" />
     <ClCompile Include="Scripts\Shader.cpp" />
+    <ClCompile Include="Scripts\stb_image.cpp" />
     <ClCompile Include="Scripts\Texture.cpp" />
     <ClCompile Include="Scripts\Managers\WindowManager.cpp" />
     <ClCompile Include="Scripts\VAO.cpp" />
@@ -417,6 +428,7 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="Assets\Models\backpack\backpack.mtl" />
     <None Include="includes\assimp\color4.inl" />
     <None Include="includes\assimp\material.inl" />
     <None Include="includes\assimp\matrix3x3.inl" />
@@ -541,6 +553,8 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <None Include="Scripts\Shaders\ex1.vs" />
     <None Include="Scripts\Shaders\light.fs" />
     <None Include="Scripts\Shaders\light.vs" />
+    <None Include="Scripts\Shaders\model.fs" />
+    <None Include="Scripts\Shaders\model.vs" />
     <None Include="Scripts\Shaders\object.vs" />
     <None Include="Scripts\Shaders\object.fs" />
   </ItemGroup>
@@ -548,6 +562,12 @@ xcopy /E /Y /I "$(ProjectDir)Assets" "$(OutDir)Assets\"
     <Library Include="lib\assimp-vc143-mtd.lib" />
     <Library Include="lib\glfw3.lib" />
     <Library Include="lib\glfw3_mt.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Models\backpack\backpack.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Models\backpack\source_attribution.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
